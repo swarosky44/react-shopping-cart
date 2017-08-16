@@ -1,0 +1,11 @@
+.app_wrapper {
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+}
+
+.title {
+  padding-bottom: 1rem;
+  font-size: 2rem;
+  border-bottom: 1px solid var(--bor-grey);
+}

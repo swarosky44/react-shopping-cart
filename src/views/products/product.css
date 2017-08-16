@@ -1,0 +1,5 @@
+.list_wrapper {
+  margin: 0;
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid var(--bor-grey);
+}

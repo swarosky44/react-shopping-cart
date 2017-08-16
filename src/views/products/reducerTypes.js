@@ -1,0 +1,4 @@
+export default {
+  INIT_PRODUCTS: 'INIT_PRODUCTS',
+  REDUCE_PRODUCT: 'REDUCE_PRODUCT',
+};
