@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Product from './Product';
+import ProductItem from './productItem';
 import actions from './action';
+import cartAction from '../cart/action';
 import dataSource from '../../data.json';
 
 class ProductContainer extends Component {
@@ -18,6 +20,7 @@ class ProductContainer extends Component {
       quantity: PropTypes.number,
     })),
     initProducts: PropTypes.func.isRequired,
+    addToCart: PropTypes.func.isRequired,
   }
 
   componentWillMount() {
@@ -29,11 +32,17 @@ class ProductContainer extends Component {
   }
 
   render() {
-    const { products } = this.props;
+    const { products, addToCart } = this.props;
     return (
-      <Product
-        products={products}
-      />
+      <Product>
+        {products.map(product => (
+          <ProductItem
+            product={product}
+            key={product.id}
+            onAddToCartClicked={() => addToCart(product)}
+          />
+        ))}
+      </Product>
     );
   }
 }
@@ -41,6 +50,10 @@ class ProductContainer extends Component {
 const mapStateToProps = state => ({ products: state.products.all });
 const mapDispatchToProps = dispatch => ({
   initProducts: products => dispatch(actions.initProducts(products)),
+  addToCart: (product) => {
+    dispatch(actions.reduceProduct(product));
+    dispatch(cartAction.addCart(product));
+  },
 });
 export default connect(
   mapStateToProps,

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import productAction from '../products/action';
-// import cartAction from '../cart/action';
-import style from './item.css';
+import style from './productItem.css';
 
 class ProductItem extends Component {
   static defaultProps = {
@@ -17,11 +14,11 @@ class ProductItem extends Component {
       price: PropTypes.number,
       quantity: PropTypes.number,
     }),
-    addToCart: PropTypes.func.isRequired,
+    onAddToCartClicked: PropTypes.func.isRequired,
   }
 
   render() {
-    const { product, addToCart } = this.props;
+    const { product, onAddToCartClicked } = this.props;
     return (
       <li className={style.item}>
         <p>{ product.title }</p>
@@ -29,21 +26,12 @@ class ProductItem extends Component {
         <p>{ product.quantity }</p>
         {
           product.quantity > 0
-            ? (<button onClick={() => (addToCart(product))}> add to cart </button>)
+            ? (<button onClick={onAddToCartClicked}> add to cart </button>)
             : (<button disabled> sold out </button>)
         }
       </li>
     );
   }
 }
-const mapDispatchToProps = dispatch => ({
-  addToCart: (product) => {
-    dispatch(productAction.reduceProduct(product));
-    // dispatch(cartAction.addCart(product));
-  },
-});
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(ProductItem);
+export default ProductItem;

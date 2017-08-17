@@ -11,7 +11,8 @@ const addToCart = (state, product) => {
   } else {
     added[product.id] = Object.assign({}, product, { inventor: 1 });
   }
-  return { added };
+  console.log(added);
+  return { added: Object.assign({}, state.added, added) };
 };
 
 export default (state = initialState, action) => {

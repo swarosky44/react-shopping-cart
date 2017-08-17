@@ -1,37 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import ProductItem from '../productItem';
 import style from './product.css';
 
-class Product extends Component {
-  static defaultProps = {
-    products: [],
-  }
+const Product = ({ children }) => (
+  <ul className={style.list_wrapper}>
+    { children }
+  </ul>
+);
 
-  static propTypes = {
-    products: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string,
-      id: PropTypes.string,
-      price: PropTypes.number,
-      quantity: PropTypes.number,
-    })),
-  }
-
-  render() {
-    const { products } = this.props;
-    return (
-      <ul className={style.list_wrapper}>
-        {
-          products.map(product => (
-            <ProductItem
-              product={product}
-              key={product.quantity}
-            />
-          ))
-        }
-      </ul>
-    );
-  }
-}
+Product.defaultProps = {
+  children: null,
+};
+Product.propTypes = {
+  children: PropTypes.node,
+};
 
 export default Product;
